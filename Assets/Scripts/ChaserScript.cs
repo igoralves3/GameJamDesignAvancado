@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ChaserScript : MonoBehaviour
 {
-
+    private bool swimming = false;
     public GameObject player;
 
     public Rigidbody2D rb;
@@ -14,14 +15,25 @@ public class ChaserScript : MonoBehaviour
     private const float minSpeed= 5f;
     private const float maxSpeed=15f;
 
+    private const float swimSpeed = 2f;
+
     public float speed = minSpeed;
 
     private bool canJump = false;
     private float jumpHeight = 10f;
 
+    private bool canSwim = true;
+
     // Start is called before the first frame update
     void Start()
     {
+        Scene scene = SceneManager.GetActiveScene();
+
+        if (scene.name == "Stage3")
+        {
+            swimming = true;
+            speed = swimSpeed;
+        }
 
         gameObject.layer = LayerMask.NameToLayer("Chaser");
 
@@ -33,14 +45,18 @@ public class ChaserScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var distance = Vector3.Distance(transform.position,player.transform.position);
-        if (distance > 10f)
+        if (!swimming)
         {
-            speed = maxSpeed;
-        }
-        else
-        {
-            speed = minSpeed;
+            
+            var distance = Vector3.Distance(transform.position, player.transform.position);
+            if (distance > 8f)
+            {
+                speed = maxSpeed;
+            }
+            else
+            {
+                speed = minSpeed;
+            }
         }
 
         if (player.transform.position.x > transform.position.x)
@@ -64,28 +80,56 @@ public class ChaserScript : MonoBehaviour
             Debug.Log(hit.collider.gameObject.tag);
             if (hit.collider.gameObject.tag == "Ground" || hit.collider.gameObject.tag == "Enemy")
             {
-                var delta = Vector3.Distance(transform.position, hit.collider.transform.position);
+                var distance = Math.Abs(transform.position.x - hit.collider.transform.position.x);// Vector3.Distance(transform.position, hit.collider.transform.position);
 
                 if (distance < 7.5f)
                 {
-                    Jump();
+                    if (!swimming)
+                    {
+                        Jump();
+                    }
+                    else
+                    {
+                        Swim();
+                    }
                 }
             }
             else if(hit.collider.gameObject.tag == "Player")
             {
-                var delta = Vector3.Distance(transform.position, hit.collider.transform.position);
+                var distance = Math.Abs(transform.position.x- hit.collider.transform.position.x);// Vector3.Distance(transform.position, hit.collider.transform.position);
 
-                if (distance < 7.5f)
+                if (distance < 7f)
                 {
-
-                    if (player.transform.position.y > transform.position.y + 2f)
+                    var deltaY = 0f;
+                    if (!swimming)
                     {
-                        Jump();
+                        deltaY = 2f;
+                    }
+
+
+                    if (player.transform.position.y > transform.position.y + deltaY)
+                    {
+                        if (!swimming)
+                        {
+                            Jump();
+                        }
+                        else
+                        {
+                            Swim();
+                        }
                     }
                 }
             }
         }
-       
+
+        if (swimming)
+        {
+            if (rb.velocity.y <= 0)
+            {
+                canSwim = true;
+            }
+        }
+
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -93,7 +137,7 @@ public class ChaserScript : MonoBehaviour
 
         if (col.gameObject.tag == "Ground")
         {
-            if (col.transform.position.y < transform.position.y)
+            if (col.transform.position.y + col.transform.localScale.y < transform.position.y + transform.localScale.y)
             {
                 canJump = true;
             }
@@ -120,7 +164,21 @@ public class ChaserScript : MonoBehaviour
         if (canJump)
         {
             canJump = false;
-            rb.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
+            rb.AddForce(transform.up * jumpHeight,ForceMode2D.Impulse);
         }
     }
+
+    void Swim()
+    {
+        if (canSwim)
+        {
+            if (rb.velocity.y < 5f)
+            {
+                canSwim = false;
+                rb.AddForce(transform.up * 5f, ForceMode2D.Impulse);
+            }
+        }
+    }
+
+
 }

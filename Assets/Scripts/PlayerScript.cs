@@ -7,19 +7,32 @@ using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
+    private bool swimming = false;
 
     public Rigidbody2D rb;
 
     public Camera camera;
 
     private float speed = 5f;
+    private const float swimSpeed = 2f;
 
     private bool canJump = false;
     private float jumpHeight = 10f;
 
+    private bool canSwim = true;
+
     // Start is called before the first frame update
     void Start()
     {
+        Scene scene = SceneManager.GetActiveScene();
+
+        if (scene.name == "Stage3")
+        {
+            swimming = true;
+            speed = swimSpeed;
+        }
+
+
         rb = GetComponent<Rigidbody2D>();
 
         camera = GetComponent<Camera>();
@@ -37,9 +50,23 @@ public class PlayerScript : MonoBehaviour
             transform.position -= Vector3.left * speed * Time.deltaTime;
         }
 
-        if (Input.GetKey("space"))
+        if (Input.GetKeyDown("space"))
         {
-            Jump();
+            if (!swimming) {
+                Jump();
+            }
+            else
+            {
+                Swim();
+            }
+        }
+
+        if (swimming)
+        {
+            if (rb.velocity.y <= 0)
+            {
+                canSwim = true;
+            }
         }
     }
 
@@ -48,7 +75,7 @@ public class PlayerScript : MonoBehaviour
 
         if (col.gameObject.tag == "Ground")
         {
-            if (col.transform.position.y < transform.position.y)
+            if (col.transform.position.y+col.transform.localScale.y < transform.position.y + transform.localScale.y)
             {
                 canJump = true;
             }
@@ -75,21 +102,7 @@ public class PlayerScript : MonoBehaviour
         Debug.Log(col.gameObject.name + " : " + gameObject.name + " : " + Time.time);
         if (col.gameObject.tag == "Exit")
         {
-            Scene scene = SceneManager.GetActiveScene();
-            //SceneManager.LoadScene("Stage0");
-
-            switch (scene.name)
-            {
-                case "Stage0":
-                    SceneManager.LoadScene("Stage1");
-                    break;
-                case "Stage1":
-                    SceneManager.LoadScene("Stage2");
-                    break;
-                default:
-                    break;
-
-            }
+            StageClear();
         }
     }
 
@@ -98,7 +111,40 @@ public class PlayerScript : MonoBehaviour
         if (canJump)
         {
             canJump = false;
-            rb.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
+            rb.AddForce(transform.up * jumpHeight,ForceMode2D.Impulse);
+        }
+    }
+
+    void Swim()
+    {
+        if (rb.velocity.y < 5f) {
+            rb.AddForce(transform.up * 5f, ForceMode2D.Impulse);
+        }
+    }
+
+    void StageClear()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        //SceneManager.LoadScene("Stage0");
+
+        switch (scene.name)
+        {
+            case "Stage0":
+                SceneManager.LoadScene("Stage1");
+                break;
+            case "Stage1":
+                SceneManager.LoadScene("Stage2");
+                break;
+            case "Stage2":
+                SceneManager.LoadScene("Stage3");
+                break;
+            case "Stage3":
+                //SceneManager.LoadScene("Stage4");
+                break;
+
+            default:
+                break;
+
         }
     }
 
