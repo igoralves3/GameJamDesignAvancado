@@ -139,7 +139,10 @@ public class PlayerScript : MonoBehaviour
                 SceneManager.LoadScene("Stage3");
                 break;
             case "Stage3":
-                //SceneManager.LoadScene("Stage4");
+                SceneManager.LoadScene("Stage4");
+                break;
+            case "Stage4":
+                SceneManager.LoadScene("VictoryScreen");
                 break;
 
             default:

@@ -8,6 +8,7 @@ TagManager:
   - Chaser
   - Exit
   - Enemy
+  - Projectile
   layers:
   - Default
   - TransparentFX

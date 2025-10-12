@@ -27,6 +27,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Stage3.unity
     guid: 9b9e560e70519cb4eb037547d164bee4
   - enabled: 1
+    path: Assets/Scenes/Stage4.unity
+    guid: 1bd838e58665bab4bb1274e140ea71b8
+  - enabled: 1
+    path: Assets/Scenes/VictoryScreen.unity
+    guid: d633ad811eb6cec42a3284105257b70d
+  - enabled: 1
     path: Assets/Scenes/GameOverScreen.unity
     guid: a67a127836ac20046bb99008af5ac00f
   m_configObjects: {}

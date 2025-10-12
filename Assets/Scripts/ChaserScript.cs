@@ -78,7 +78,7 @@ public class ChaserScript : MonoBehaviour
         if (hit)
         {
             Debug.Log(hit.collider.gameObject.tag);
-            if (hit.collider.gameObject.tag == "Ground" || hit.collider.gameObject.tag == "Enemy")
+            if (hit.collider.gameObject.tag == "Ground" || hit.collider.gameObject.tag == "Enemy" || hit.collider.gameObject.tag == "Projectile")
             {
                 var distance = Math.Abs(transform.position.x - hit.collider.transform.position.x);// Vector3.Distance(transform.position, hit.collider.transform.position);
 
