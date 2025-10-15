@@ -20,6 +20,7 @@ public class ButtonController : MonoBehaviour
     //main menu
     public void StartGame()
     {
+        PlayerScript.lifes = 3;
         SceneManager.LoadScene("Stage0");
     }
 

@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+using TMPro;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -20,6 +23,13 @@ public class PlayerScript : MonoBehaviour
     private float jumpHeight = 10f;
 
     private bool canSwim = true;
+
+    public static int lifes = 3;
+
+    public Canvas canvas;
+    public Text text;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +78,8 @@ public class PlayerScript : MonoBehaviour
                 canSwim = true;
             }
         }
+
+        UpdateUI();
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -82,7 +94,7 @@ public class PlayerScript : MonoBehaviour
         }
         if (col.gameObject.tag == "Chaser")
         {
-           
+            CaughtByChaser();
         }
     }
 
@@ -149,6 +161,24 @@ public class PlayerScript : MonoBehaviour
                 break;
 
         }
+    }
+
+    void CaughtByChaser()
+    {
+        if (lifes == 1) {
+
+            SceneManager.LoadScene("GameOverScreen");
+        }
+        else
+        {
+            lifes--;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
+    void UpdateUI()
+    {
+        text.text =("Lifes : " + lifes.ToString());
     }
 
 }
