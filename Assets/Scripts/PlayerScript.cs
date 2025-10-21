@@ -20,7 +20,7 @@ public class PlayerScript : MonoBehaviour
     private const float swimSpeed = 2f;
 
     private bool canJump = false;
-    private float jumpHeight = 10f;
+    public float jumpHeight = 10f;
 
     private bool canSwim = true;
 
@@ -29,7 +29,7 @@ public class PlayerScript : MonoBehaviour
     public Canvas canvas;
     public Text text;
 
-    
+    public float moveSpeed = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -54,15 +54,26 @@ public class PlayerScript : MonoBehaviour
     {
         if (Input.GetKey("left"))
         {
-            transform.position += Vector3.left * speed * Time.deltaTime;
-        }else if (Input.GetKey("right"))
+            //transform.position += Vector3.left * speed * Time.deltaTime;
+
+            rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+
+        }
+        else if (Input.GetKey("right"))
         {
-            transform.position -= Vector3.left * speed * Time.deltaTime;
+            //transform.position -= Vector3.left * speed * Time.deltaTime;
+
+            rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = new Vector2(0f, rb.velocity.y);
         }
 
         if (Input.GetKeyDown("space"))
         {
-            if (!swimming) {
+            if (!swimming)
+            {
                 Jump();
             }
             else
@@ -78,8 +89,15 @@ public class PlayerScript : MonoBehaviour
                 canSwim = true;
             }
         }
+        else
+        {
+            if (rb.velocity.y == 0)
+            {
+                canJump = true;
+            }
+        }
 
-        UpdateUI();
+            UpdateUI();
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -123,7 +141,8 @@ public class PlayerScript : MonoBehaviour
         if (canJump)
         {
             canJump = false;
-            rb.AddForce(transform.up * jumpHeight,ForceMode2D.Impulse);
+            //rb.AddForce(transform.up * jumpHeight,ForceMode2D.Impulse);
+            rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
         }
     }
 
