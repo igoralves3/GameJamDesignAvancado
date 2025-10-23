@@ -30,6 +30,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Stage4.unity
     guid: 1bd838e58665bab4bb1274e140ea71b8
   - enabled: 1
+    path: Assets/Scenes/Stage5.unity
+    guid: 306f1e0653e649644a5ce4171d14648c
+  - enabled: 1
     path: Assets/Scenes/VictoryScreen.unity
     guid: d633ad811eb6cec42a3284105257b70d
   - enabled: 1

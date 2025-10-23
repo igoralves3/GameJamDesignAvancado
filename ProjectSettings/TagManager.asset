@@ -9,6 +9,7 @@ TagManager:
   - Exit
   - Enemy
   - Projectile
+  - PowerUp
   layers:
   - Default
   - TransparentFX

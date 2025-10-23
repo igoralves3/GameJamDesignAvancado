@@ -1,7 +1,8 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,7 @@ public class ChaserScript : MonoBehaviour
     public GameObject player;
 
     public Rigidbody2D rb;
+    public BoxCollider2D bc;
 
     private const float minSpeed= 5f;
     private const float maxSpeed=15f;
@@ -25,6 +27,12 @@ public class ChaserScript : MonoBehaviour
     private bool canSwim = true;
 
     public float moveSpeed = 5f;
+
+    public bool stopped = false;
+    public int stoppedFrames = 0;
+
+    public float tempoParado = 2f;
+    private RigidbodyType2D tipoOriginal;
 
     // Start is called before the first frame update
     void Start()
@@ -42,11 +50,23 @@ public class ChaserScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
 
         rb = GetComponent<Rigidbody2D>();
+        bc = GetComponent<BoxCollider2D>();
+
+        tipoOriginal = rb.bodyType;
+
+        stopped = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (stopped)
+        {
+            StartCoroutine(PararTemporariamente());
+            return;
+        }
+
         if (!swimming)
         {
             
@@ -194,5 +214,20 @@ public class ChaserScript : MonoBehaviour
         }
     }
 
+   public  IEnumerator PararTemporariamente()
+    {
+        // 1️⃣ Desativa o movimento e colisões
+        rb.bodyType = RigidbodyType2D.Static; // congela totalmente o corpo
+        bc.enabled = false; // desativa colisões
+
+        // 2️⃣ Espera o tempo desejado
+        yield return new WaitForSeconds(tempoParado);
+
+        // 3️⃣ Reativa física e colisões
+        rb.bodyType = tipoOriginal;
+        bc.enabled = true;
+
+        stopped = false;
+    }
 
 }
