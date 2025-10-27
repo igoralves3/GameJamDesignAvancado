@@ -76,7 +76,7 @@ public class PlayerScript : MonoBehaviour
             rb.velocity = new Vector2(0f, rb.velocity.y);
         }
 
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKey("space"))
         {
             if (!swimming)
             {
