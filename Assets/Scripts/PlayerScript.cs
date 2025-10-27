@@ -51,7 +51,13 @@ public class PlayerScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    { 
+    
+    }
+
+
+    void FixedUpdate()
+    { 
         if (Input.GetKey("left"))
         {
             //transform.position += Vector3.left * speed * Time.deltaTime;

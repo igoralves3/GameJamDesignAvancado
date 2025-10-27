@@ -36,7 +36,7 @@ public class FlyingEnemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         currentFramesForProjectile += Time.deltaTime;
 

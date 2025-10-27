@@ -27,7 +27,7 @@ public class SwimmingEnemy2 : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //transform.position += Vector3.left * speed * Time.deltaTime;
         frame += Time.deltaTime;

@@ -17,7 +17,7 @@ public class JumpingEnemyScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Jump();
     }

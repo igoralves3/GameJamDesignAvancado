@@ -19,7 +19,7 @@ public class Enemy1Script : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         transform.position += side * Vector3.right * speed * Time.deltaTime;
     }
