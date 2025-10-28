@@ -34,6 +34,10 @@ public class ChaserScript : MonoBehaviour
     public float tempoParado = 2f;
     private RigidbodyType2D tipoOriginal;
 
+    public SpriteRenderer spr;
+
+    private float dir = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +59,10 @@ public class ChaserScript : MonoBehaviour
         tipoOriginal = rb.bodyType;
 
         stopped = false;
+
+        spr = GetComponent<SpriteRenderer>();
+
+        dir = 1f;
     }
 
     // Update is called once per frame
@@ -86,12 +94,14 @@ public class ChaserScript : MonoBehaviour
             //transform.position -= Vector3.left * speed * Time.deltaTime;
 
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+            dir = 1f;
         }
         else if (player.transform.position.x < transform.position.x)
         {
             //transform.position += Vector3.left * speed * Time.deltaTime;
 
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+            dir = -1f;
         }
 
         int layerMask = ~(1 << LayerMask.NameToLayer("Chaser")); // Exclude the "Player" layer
@@ -162,7 +172,7 @@ public class ChaserScript : MonoBehaviour
                 canJump = true;
             }
         }
-
+        UpdateSprite();
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -228,6 +238,18 @@ public class ChaserScript : MonoBehaviour
         bc.enabled = true;
 
         stopped = false;
+    }
+
+    void UpdateSprite()
+    {
+        if (dir > 0)
+        {
+            spr.flipX = false;
+        }
+        else if (dir < 0)
+        {
+            spr.flipX = true;
+        }
     }
 
 }
