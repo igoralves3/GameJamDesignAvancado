@@ -10,24 +10,26 @@ public class Enemy1Script : MonoBehaviour
 
     private float speed = 1f;
 
-
+    public SpriteRenderer spr;
 
     // Start is called before the first frame update
     void Start()
     {
         side = -1f;
+        spr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         transform.position += side * Vector3.right * speed * Time.deltaTime;
+        UpdateSprite();
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
 
-        if (col.gameObject.tag == "Ground")
+        if (col.gameObject.tag == "Ground" || col.gameObject.tag == "Chaser" || col.gameObject.tag == "Player" || col.gameObject.tag == "Enemy")
         {
             if (side < 0) {
                 if (col.transform.position.x < transform.position.x)
@@ -35,7 +37,7 @@ public class Enemy1Script : MonoBehaviour
                     side = -side;
                 }
             }
-            else
+            else if (side > 0)
             {
                 if (col.transform.position.x > transform.position.x)
                 {
@@ -44,5 +46,16 @@ public class Enemy1Script : MonoBehaviour
             }
         }
        
+    }
+
+    void UpdateSprite()
+    {
+        if (side < 0)
+        {
+            spr.flipX = false;
+        }else if (side > 0)
+        {
+            spr.flipX = true;
+        }
     }
 }
