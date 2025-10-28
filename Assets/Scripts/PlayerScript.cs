@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 using TMPro;
+using System.Runtime.InteropServices;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -31,6 +32,10 @@ public class PlayerScript : MonoBehaviour
 
     public float moveSpeed = 5f;
 
+    public SpriteRenderer spr;
+
+    private float dir = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +51,9 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         camera = GetComponent<Camera>();
-        
+        spr = GetComponent<SpriteRenderer>();
+
+        dir = 1f;
     }
 
     // Update is called once per frame
@@ -63,13 +70,14 @@ public class PlayerScript : MonoBehaviour
             //transform.position += Vector3.left * speed * Time.deltaTime;
 
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
-
+            dir = -1f;
         }
         else if (Input.GetKey("right"))
         {
             //transform.position -= Vector3.left * speed * Time.deltaTime;
 
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+            dir = 1f;
         }
         else
         {
@@ -102,8 +110,9 @@ public class PlayerScript : MonoBehaviour
                 canJump = true;
             }
         }
-
+        UpdateSprite();
             UpdateUI();
+
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -210,6 +219,17 @@ public class PlayerScript : MonoBehaviour
     void UpdateUI()
     {
         text.text =("Lifes : " + lifes.ToString());
+    }
+
+    void UpdateSprite()
+    {
+        if (dir > 0)
+        {
+            spr.flipX = false;
+        }else if (dir < 0)
+        {
+            spr.flipX = true;
+        }
     }
 
 }
