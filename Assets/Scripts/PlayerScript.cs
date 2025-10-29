@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour
     private bool swimming = false;
 
     public Rigidbody2D rb;
+    public BoxCollider2D bc;
 
     public Camera camera;
 
@@ -35,20 +36,28 @@ public class PlayerScript : MonoBehaviour
     public SpriteRenderer spr;
 
     private float dir = 1f;
+    public PhysicsMaterial2D pm;
 
     // Start is called before the first frame update
     void Start()
     {
         Scene scene = SceneManager.GetActiveScene();
 
+        rb = GetComponent<Rigidbody2D>();
+        bc = GetComponent<BoxCollider2D>();
+
         if (scene.name == "Stage3")
         {
+           // rb.gravityScale = 1f;
+
             swimming = true;
             speed = swimSpeed;
+
+            //bc.sharedMaterial = pm;
         }
 
 
-        rb = GetComponent<Rigidbody2D>();
+       
 
         camera = GetComponent<Camera>();
         spr = GetComponent<SpriteRenderer>();
@@ -95,6 +104,8 @@ public class PlayerScript : MonoBehaviour
                 Swim();
             }
         }
+        
+
 
         if (swimming)
         {
@@ -163,8 +174,11 @@ public class PlayerScript : MonoBehaviour
 
     void Swim()
     {
-        if (rb.velocity.y < 5f) {
-            rb.AddForce(transform.up * 5f, ForceMode2D.Impulse);
+        if (canSwim) {
+            if (rb.velocity.y < 5f) {
+                canSwim = false;
+                rb.AddForce(transform.up * 5f, ForceMode2D.Impulse);
+            }
         }
     }
 

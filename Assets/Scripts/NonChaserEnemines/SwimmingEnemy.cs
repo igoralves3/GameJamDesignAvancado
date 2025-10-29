@@ -14,13 +14,22 @@ public class SwimmingEnemy : MonoBehaviour
     private float frame;
     private float dirDuration;
 
+    public SpriteRenderer spr;
+
+    private float dir = -1f;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
+        spr = GetComponent<SpriteRenderer>();
+
+        dir = -1f;
+
         frame = 0;
         dirDuration=Random.Range(5, 10);
+
     }
 
     // Update is called once per frame
@@ -33,7 +42,21 @@ public class SwimmingEnemy : MonoBehaviour
             frame = 0;
             dirDuration = Random.Range(5,10);
             speed = -speed;
+
+            dir = speed;
         }
-        
+        UpdateSprite();
+    }
+
+    void UpdateSprite()
+    {
+        if (dir > 0)
+        {
+            spr.flipX = true;
+        }
+        else if (dir < 0)
+        {
+            spr.flipX = false;
+        }
     }
 }
