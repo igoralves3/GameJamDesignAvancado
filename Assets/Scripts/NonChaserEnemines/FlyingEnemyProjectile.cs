@@ -21,7 +21,7 @@ public class FlyingEnemyProjectile : MonoBehaviour
 
         if (col.gameObject.tag == "Ground" || col.gameObject.tag == "Chaser" || col.gameObject.tag == "Player" || col.gameObject.tag == "Projectile")
         {
-            Destroy(this.gameObject,1);
+            Destroy(this.gameObject);
         }
 
     }

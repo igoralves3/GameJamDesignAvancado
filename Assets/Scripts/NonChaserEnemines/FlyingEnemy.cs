@@ -21,6 +21,10 @@ public class FlyingEnemy : MonoBehaviour
 
     public GameObject projectile;
 
+    public SpriteRenderer spr;
+
+    private float dir = -1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +37,10 @@ public class FlyingEnemy : MonoBehaviour
         currentFramesForChangeDir = 0;
 
         framesForChangeDir = Random.Range(4, 10);
+
+        spr = GetComponent<SpriteRenderer>();
+
+        dir = -1f;
     }
 
     // Update is called once per frame
@@ -53,7 +61,10 @@ public class FlyingEnemy : MonoBehaviour
             framesForChangeDir = Random.Range(4, 10);
 
             side = -side;
+            dir = side;
         }
+
+        UpdateSprite();
     }
 
     void DropProjectile()
@@ -68,5 +79,17 @@ public class FlyingEnemy : MonoBehaviour
 
 
         Instantiate(projectile, new Vector3(newX,newY,newZ), Quaternion.identity);
+    }
+
+    void UpdateSprite()
+    {
+        if (dir > 0)
+        {
+            spr.flipX = true;
+        }
+        else if (dir < 0)
+        {
+            spr.flipX = false;
+        }
     }
 }

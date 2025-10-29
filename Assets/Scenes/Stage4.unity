@@ -146,6 +146,10 @@ PrefabInstance:
       propertyPath: minX
       value: -9.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2131953512809722961, guid: f0110d416aaf029468c0f83dd3d720ed, type: 3}
+      propertyPath: minY
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5410907229698819005, guid: f0110d416aaf029468c0f83dd3d720ed, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4
