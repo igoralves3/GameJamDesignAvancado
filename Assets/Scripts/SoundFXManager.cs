@@ -36,6 +36,21 @@ public class SoundFXManager : MonoBehaviour
         Destroy(audioSource.gameObject, clipLength);
     }
 
+    public void PlayMusicFXClip(AudioClip audioClip, Transform spawnTransform, float volume)
+    {
+        AudioSource audioSource = Instantiate(musicFXObject, spawnTransform.position, Quaternion.identity);
+
+        audioSource.clip = audioClip;
+
+        audioSource.volume = volume;
+
+        audioSource.Play();
+
+       // float clipLength = audioSource.clip.length;
+
+        //Destroy(audioSource.gameObject, clipLength);
+    }
+
 
 
     // Start is called before the first frame update
