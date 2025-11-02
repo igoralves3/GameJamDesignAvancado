@@ -12,6 +12,8 @@ public class Enemy1Script : MonoBehaviour
 
     public SpriteRenderer spr;
 
+    public AudioClip clip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,9 +33,14 @@ public class Enemy1Script : MonoBehaviour
 
         if (col.gameObject.tag == "Ground" || col.gameObject.tag == "Chaser" || col.gameObject.tag == "Player" || col.gameObject.tag == "Enemy")
         {
+            if (col.gameObject.tag == "Player")
+            {
+                SoundFXManager.instance.PlaySoundFXClip(clip, transform, 1f);
+            }
             if (side < 0) {
                 if (col.transform.position.x < transform.position.x)
                 {
+                 
                     side = -side;
                 }
             }
@@ -41,6 +48,7 @@ public class Enemy1Script : MonoBehaviour
             {
                 if (col.transform.position.x > transform.position.x)
                 {
+                    
                     side = -side;
                 }
             }

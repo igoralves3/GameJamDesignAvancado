@@ -27,7 +27,7 @@ public class SoundFXManager : MonoBehaviour
 
         audioSource.clip = audioClip;
 
-        audioSource.volume = volume;
+        //audioSource.volume = volume;
 
         audioSource.Play();
 
@@ -42,7 +42,7 @@ public class SoundFXManager : MonoBehaviour
 
         audioSource.clip = audioClip;
 
-        audioSource.volume = volume;
+        //audioSource.volume = volume;
 
         audioSource.Play();
 
@@ -56,7 +56,7 @@ public class SoundFXManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame

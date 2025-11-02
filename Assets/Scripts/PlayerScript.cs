@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
@@ -38,6 +38,10 @@ public class PlayerScript : MonoBehaviour
     private float dir = 1f;
     public PhysicsMaterial2D pm;
 
+    public bool collectedPoo = false;
+
+    private RigidbodyType2D tipoOriginal;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,8 +60,8 @@ public class PlayerScript : MonoBehaviour
             //bc.sharedMaterial = pm;
         }
 
+        tipoOriginal = rb.bodyType;
 
-       
 
         camera = GetComponent<Camera>();
         spr = GetComponent<SpriteRenderer>();
@@ -73,7 +77,13 @@ public class PlayerScript : MonoBehaviour
 
 
     void FixedUpdate()
-    { 
+    {
+        if (collectedPoo)
+        {
+            StartCoroutine(CollectedPoo());
+            return;
+        }
+
         if (Input.GetKey("left"))
         {
             //transform.position += Vector3.left * speed * Time.deltaTime;
@@ -244,6 +254,24 @@ public class PlayerScript : MonoBehaviour
         {
             spr.flipX = true;
         }
+    }
+
+    public IEnumerator CollectedPoo()
+    {
+        // 1️⃣ Desativa o movimento e colisões
+        rb.bodyType = RigidbodyType2D.Static; // congela totalmente o corpo
+        //bc.enabled = false; // desativa colisões
+
+       
+
+        // 2️⃣ Espera o tempo desejado
+        yield return new WaitForSeconds(1);
+
+        // 3️⃣ Reativa física e colisões
+        rb.bodyType = tipoOriginal;
+        //bc.enabled = true;
+
+        collectedPoo = false;
     }
 
 }

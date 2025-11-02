@@ -25,6 +25,10 @@ public class FlyingEnemy : MonoBehaviour
 
     private float dir = -1f;
 
+    public AudioClip clip;
+
+    public Transform playerTransform;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +45,12 @@ public class FlyingEnemy : MonoBehaviour
         spr = GetComponent<SpriteRenderer>();
 
         dir = -1f;
+
+        var p = GameObject.FindGameObjectWithTag("Player");
+        if (p != null)
+        {
+            playerTransform = p.transform;
+        }
     }
 
     // Update is called once per frame
@@ -69,6 +79,10 @@ public class FlyingEnemy : MonoBehaviour
 
     void DropProjectile()
     {
+        if (Vector3.Distance(transform.position, playerTransform.position) < 10)
+        {
+            SoundFXManager.instance.PlaySoundFXClip(clip, transform, 1f);
+        }
         currentFramesForProjectile = 0;
         framesForProjectile = Random.Range(2, 5);
 

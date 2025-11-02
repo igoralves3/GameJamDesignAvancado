@@ -38,6 +38,8 @@ public class ChaserScript : MonoBehaviour
 
     private float dir = 1f;
 
+    public bool collectedPoo = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,6 +74,11 @@ public class ChaserScript : MonoBehaviour
         if (stopped)
         {
             StartCoroutine(PararTemporariamente());
+            return;
+        }
+        if (collectedPoo)
+        {
+            StartCoroutine(CollectedPoo());
             return;
         }
 
@@ -222,6 +229,22 @@ public class ChaserScript : MonoBehaviour
                 rb.AddForce(transform.up * 5f, ForceMode2D.Impulse);
             }
         }
+    }
+
+    public IEnumerator CollectedPoo()
+    {
+        // 1️⃣ Desativa o movimento e colisões
+        rb.bodyType = RigidbodyType2D.Static; // congela totalmente o corpo
+        //bc.enabled = false; // desativa colisões
+
+        // 2️⃣ Espera o tempo desejado
+        yield return new WaitForSeconds(1);
+
+        // 3️⃣ Reativa física e colisões
+        rb.bodyType = tipoOriginal;
+        //bc.enabled = true;
+
+        collectedPoo = false;
     }
 
    public  IEnumerator PararTemporariamente()
