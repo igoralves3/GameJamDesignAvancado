@@ -25,6 +25,9 @@ public class VolumeSettings : MonoBehaviour
 
     void Start()
     {
+        audioMixer.SetFloat("bgm", Mathf.Log10(0.5f) * 20);
+        audioMixer.SetFloat("sfx", Mathf.Log10(0.5f) * 20);
+
         SetBGMVolume();
         SetSFXVolume();
     }
