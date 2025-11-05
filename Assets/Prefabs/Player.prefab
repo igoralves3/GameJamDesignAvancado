@@ -131,6 +131,7 @@ MonoBehaviour:
   moveSpeed: 5
   spr: {fileID: 0}
   pm: {fileID: 6200000, guid: 61595f28753cec242968ff7d9386f785, type: 2}
+  collectedPoo: 0
 --- !u!212 &1107986900733811954
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -241,7 +242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -472,6 +473,7 @@ MonoBehaviour:
   target: {fileID: 5410907229698819005}
   smoothSpeed: 0.125
   offset: {x: 0, y: 0, z: 0}
+  camera: {fileID: 0}
   minX: 0
   maxX: 0
   minY: -4
