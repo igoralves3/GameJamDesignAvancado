@@ -50,11 +50,11 @@ public class SwimmingEnemy : MonoBehaviour
 
     void UpdateSprite()
     {
-        if (dir > 0)
+        if (speed > 0)
         {
             spr.flipX = true;
         }
-        else if (dir < 0)
+        else if (speed < 0)
         {
             spr.flipX = false;
         }
