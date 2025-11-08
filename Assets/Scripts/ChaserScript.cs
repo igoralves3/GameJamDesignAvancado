@@ -189,7 +189,11 @@ public class ChaserScript : MonoBehaviour
         {
             if (col.transform.position.y + col.transform.localScale.y < transform.position.y + transform.localScale.y)
             {
-                canJump = true;
+                if (Mathf.Abs(transform.position.x - col.transform.position.x) <= col.transform.lossyScale.x)
+                {
+                    canJump = true;
+                }
+                
             }
         }
         if (col.gameObject.tag == "Player")

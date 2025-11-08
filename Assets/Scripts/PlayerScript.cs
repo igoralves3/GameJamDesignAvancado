@@ -141,9 +141,11 @@ public class PlayerScript : MonoBehaviour
 
         if (col.gameObject.tag == "Ground")
         {
-            if (col.transform.position.y+col.transform.localScale.y < transform.position.y + transform.localScale.y)
+            if (col.transform.position.y + col.transform.lossyScale.y < transform.position.y + transform.lossyScale.y)
             {
-                canJump = true;
+                if (Mathf.Abs(transform.position.x - col.transform.position.x) <= col.transform.lossyScale.x) {
+                    canJump = true;
+                }
             }
         }
         if (col.gameObject.tag == "Chaser")
