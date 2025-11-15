@@ -130,6 +130,9 @@ MonoBehaviour:
   text: {fileID: 1021425030119901183}
   moveSpeed: 5
   spr: {fileID: 0}
+  sprites:
+  - {fileID: 21300000, guid: eb1f2af79a12e1f4a90b9b459efd3534, type: 3}
+  - {fileID: 21300000, guid: 24d654ffddbab354ca356dca71f6a542, type: 3}
   pm: {fileID: 6200000, guid: 61595f28753cec242968ff7d9386f785, type: 2}
   collectedPoo: 0
 --- !u!212 &1107986900733811954

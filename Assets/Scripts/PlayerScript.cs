@@ -35,6 +35,10 @@ public class PlayerScript : MonoBehaviour
 
     public SpriteRenderer spr;
 
+    public Sprite[] sprites;
+    private int spriteFrame = 0;
+    private int spriteIndex = 0;    
+
     private float dir = 1f;
     public PhysicsMaterial2D pm;
 
@@ -249,10 +253,31 @@ public class PlayerScript : MonoBehaviour
 
     void UpdateSprite()
     {
+        if (rb.velocity.x != 0)
+        {
+            spriteFrame++;
+            if (spriteFrame >= 10)
+            {
+                spriteFrame = 0;
+                spriteIndex++;
+                if (spriteIndex > 1)
+                {
+                    spriteIndex = 0;
+                }
+            }
+        }
+        else
+        {
+            spriteFrame = 0;
+        }
+
+        spr.sprite = sprites[spriteIndex];
+
         if (dir > 0)
         {
             spr.flipX = false;
-        }else if (dir < 0)
+        }
+        else if (dir < 0)
         {
             spr.flipX = true;
         }

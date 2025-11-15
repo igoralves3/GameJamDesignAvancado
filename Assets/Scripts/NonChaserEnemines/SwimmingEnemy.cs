@@ -9,7 +9,7 @@ public class SwimmingEnemy : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    private float speed = 1f;
+    private float speed = -1f;
 
     private float frame;
     private float dirDuration;
@@ -25,7 +25,7 @@ public class SwimmingEnemy : MonoBehaviour
 
         spr = GetComponent<SpriteRenderer>();
 
-        dir = -1f;
+        dir = 1f;
 
         frame = 0;
         dirDuration=Random.Range(5, 10);
