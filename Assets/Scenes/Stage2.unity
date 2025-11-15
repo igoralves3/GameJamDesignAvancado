@@ -1604,7 +1604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2131953512809722961, guid: f0110d416aaf029468c0f83dd3d720ed, type: 3}
       propertyPath: maxY
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2131953512809722961, guid: f0110d416aaf029468c0f83dd3d720ed, type: 3}
       propertyPath: minX

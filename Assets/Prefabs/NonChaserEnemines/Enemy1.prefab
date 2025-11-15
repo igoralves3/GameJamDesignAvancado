@@ -122,6 +122,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spr: {fileID: 0}
   clip: {fileID: 8300000, guid: 032063d782c89a848ac95f7014b16562, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: dc8c8813e82bcc94f92511f7d032a84c, type: 3}
+  - {fileID: 21300000, guid: ac3916ce3c9e7624f97db8888ae2bd6d, type: 3}
 --- !u!212 &5710161015144644231
 SpriteRenderer:
   m_ObjectHideFlags: 0

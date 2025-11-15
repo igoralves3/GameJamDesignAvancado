@@ -14,6 +14,10 @@ public class Enemy1Script : MonoBehaviour
 
     public AudioClip clip;
 
+    public Sprite[] sprites;
+    private int spriteFrame = 0;
+    private int spriteIndex = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +62,24 @@ public class Enemy1Script : MonoBehaviour
 
     void UpdateSprite()
     {
+        
+            spriteFrame++;
+            if (spriteFrame >= 10)
+            {
+                spriteFrame = 0;
+                spriteIndex++;
+                if (spriteIndex > 1)
+                {
+                    spriteIndex = 0;
+                }
+            }
+        
+         
+
+        spr.sprite = sprites[spriteIndex];
+
+
+
         if (side < 0)
         {
             spr.flipX = false;

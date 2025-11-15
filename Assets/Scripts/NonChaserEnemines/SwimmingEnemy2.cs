@@ -17,10 +17,16 @@ public class SwimmingEnemy2 : MonoBehaviour
 
     private float jumpHeight = 10f;
 
+    public SpriteRenderer spr;
+    public Sprite[] sprites;
+    private int spriteFrame = 0;
+    private int spriteIndex = 0;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spr = GetComponent<SpriteRenderer>();
 
         frame = 0;
         dirDuration = Random.Range(1, 2);
@@ -44,6 +50,7 @@ public class SwimmingEnemy2 : MonoBehaviour
         }
 
         Jump();
+        UpdateSprite();
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -67,6 +74,19 @@ public class SwimmingEnemy2 : MonoBehaviour
 
             frame = 0;
             dirDuration = Random.Range(1,2);
+        }
+    }
+
+    void UpdateSprite()
+    {
+        if (rb.velocity.y > 0)
+        {
+
+            spr.sprite = sprites[1];
+        }
+        else
+        {
+            spr.sprite = sprites[0];
         }
     }
 }

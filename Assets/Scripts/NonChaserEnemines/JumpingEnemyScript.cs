@@ -14,12 +14,21 @@ public class JumpingEnemyScript : MonoBehaviour
 
     public AudioClip clip;
 
-    public Transform playerTransform; 
+    public Transform playerTransform;
+
+    public SpriteRenderer spr;
+
+    public Sprite[] sprites;
+    private int spriteFrame = 0;
+    private int spriteIndex = 0;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        spr = GetComponent<SpriteRenderer>();
 
         var p= GameObject.FindGameObjectWithTag("Player");
         if (p != null)
@@ -32,6 +41,8 @@ public class JumpingEnemyScript : MonoBehaviour
     void FixedUpdate()
     {
         Jump();
+
+        UpdateSprite();
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -63,6 +74,18 @@ public class JumpingEnemyScript : MonoBehaviour
                 SoundFXManager.instance.PlaySoundFXClip(clip, transform, 1f);
             }
             rb.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
+        }
+    }
+
+    void UpdateSprite()
+    {
+        if (rb.velocity.y > 0) {
+
+            spr.sprite = sprites[1];
+        }
+        else
+        {
+            spr.sprite = sprites[0];
         }
     }
 }

@@ -15,6 +15,9 @@ public class SwimmingEnemy : MonoBehaviour
     private float dirDuration;
 
     public SpriteRenderer spr;
+    public Sprite[] sprites;
+    private int spriteFrame = 0;
+    private int spriteIndex = 0;
 
     private float dir = -1f;
 
@@ -35,7 +38,7 @@ public class SwimmingEnemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.position += Vector3.left * speed * Time.deltaTime;
+        
         frame += Time.deltaTime;
         if (frame >= dirDuration)
         {
@@ -45,18 +48,36 @@ public class SwimmingEnemy : MonoBehaviour
 
             dir = speed;
         }
+        transform.position += Vector3.left * speed * Time.deltaTime;
         UpdateSprite();
     }
 
     void UpdateSprite()
     {
+
+        spriteFrame++;
+        if (spriteFrame >= 10)
+        {
+            spriteFrame = 0;
+            spriteIndex++;
+            if (spriteIndex > 1)
+            {
+                spriteIndex = 0;
+            }
+        }
+
+
+
+        spr.sprite = sprites[spriteIndex];
+
+
         if (speed > 0)
         {
-            spr.flipX = true;
+            spr.flipX = false;
         }
         else if (speed < 0)
         {
-            spr.flipX = false;
+            spr.flipX = true;
         }
     }
 }
