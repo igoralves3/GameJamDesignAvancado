@@ -31,7 +31,7 @@ public class Bubble : MonoBehaviour
             pos = -1;
         }
 
-        var dir = new Vector3(pos,1f,-2f);
+        var dir = new Vector3(pos,1f,0f);
 
         transform.position += dir*Time.deltaTime;
     }

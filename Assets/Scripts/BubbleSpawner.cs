@@ -19,9 +19,9 @@ public class BubbleSpawner : MonoBehaviour
         maxX = transform.position.x + 13.5f;
 
         minY = transform.position.y + 1f;
-        maxY = transform.position.y + 13.5f;
+        maxY = transform.position.y + 5f;
 
-        timeLeft = Random.Range(1f, 2f);
+        timeLeft = Random.Range(5f, 10f);
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class BubbleSpawner : MonoBehaviour
             timeLeft = Random.Range(1f,2f);
             var x = Random.Range(minX, maxX);
             var y = Random.Range(minY, maxY);
-            var b = Instantiate(bubble,new Vector3(x,y,-2f), Quaternion.identity);
+            var b = Instantiate(bubble,new Vector3(x,y,0f), Quaternion.identity);
         }
     }
 }

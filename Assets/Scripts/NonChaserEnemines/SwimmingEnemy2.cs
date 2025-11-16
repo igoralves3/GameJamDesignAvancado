@@ -36,18 +36,18 @@ public class SwimmingEnemy2 : MonoBehaviour
     void FixedUpdate()
     {
         //transform.position += Vector3.left * speed * Time.deltaTime;
-        frame += Time.deltaTime;
-        if (frame >= dirDuration)
-        {
+       // frame += Time.deltaTime;
+       // if (frame >= dirDuration)
+       // {
 
             //rb.AddForce(transform.up * 10f, ForceMode2D.Impulse);
 
-            canJump = true;
+         //   canJump = true;
 
-            frame = 0;
-            dirDuration = Random.Range(1, 2);
-            speed = -speed;
-        }
+          //  frame = 0;
+         //   dirDuration = Random.Range(1, 2);
+         //   speed = -speed;
+       // }
 
         Jump();
         UpdateSprite();

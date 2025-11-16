@@ -44,6 +44,9 @@ public class ChaserScript : MonoBehaviour
 
     public bool collectedPoo = false;
 
+    private bool gettingReady;
+    private int readyCount = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +72,8 @@ public class ChaserScript : MonoBehaviour
         spr = GetComponent<SpriteRenderer>();
 
         dir = 1f;
+
+        gettingReady = true;
     }
 
     // Update is called once per frame
@@ -83,6 +88,16 @@ public class ChaserScript : MonoBehaviour
         if (collectedPoo)
         {
             StartCoroutine(CollectedPoo());
+            return;
+        }
+
+        if (gettingReady)
+        {
+            readyCount++;
+            if (readyCount >= 60)
+            {
+                gettingReady = false;
+            }
             return;
         }
 
