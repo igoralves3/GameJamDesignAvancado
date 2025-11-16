@@ -206,7 +206,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 4208969837970554335, guid: 05646c0e42a1abe4db21efc5b92f5df4, type: 3}
   spr: {fileID: 0}
+  sprites:
+  - {fileID: 21300000, guid: 7e24f9f8c9cb85f42a3ae9188a93784c, type: 3}
+  - {fileID: 21300000, guid: a7bfe4b8f31525148aadff765cc6c52e, type: 3}
   clip: {fileID: 8300000, guid: 0e10329a85977394f9b9de7f485ed5cf, type: 3}
+  playerTransform: {fileID: 0}
 --- !u!212 &1229074873723200746
 SpriteRenderer:
   m_ObjectHideFlags: 0

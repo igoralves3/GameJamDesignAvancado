@@ -23,6 +23,10 @@ public class FlyingEnemy : MonoBehaviour
 
     public SpriteRenderer spr;
 
+    public Sprite[] sprites;
+    private int spriteFrame = 0;
+    private int spriteIndex = 0;
+
     private float dir = -1f;
 
     public AudioClip clip;
@@ -97,6 +101,21 @@ public class FlyingEnemy : MonoBehaviour
 
     void UpdateSprite()
     {
+        spriteFrame++;
+        if (spriteFrame >= 10)
+        {
+            spriteFrame = 0;
+            spriteIndex++;
+            if (spriteIndex > 1)
+            {
+                spriteIndex = 0;
+            }
+        }
+
+
+
+        spr.sprite = sprites[spriteIndex];
+
         if (dir > 0)
         {
             spr.flipX = true;
