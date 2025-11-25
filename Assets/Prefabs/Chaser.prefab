@@ -216,6 +216,7 @@ MonoBehaviour:
   sprites:
   - {fileID: 21300000, guid: 99feae87ab4db204bb4e6c21225933ff, type: 3}
   - {fileID: 21300000, guid: 4ed0961d0522d334985f0c826cde821c, type: 3}
+  frozenSpr: {fileID: 21300000, guid: 0530f156356923b4e91531e621357e77, type: 3}
   collectedPoo: 0
 --- !u!212 &418455920365246764
 SpriteRenderer:

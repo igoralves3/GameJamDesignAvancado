@@ -37,6 +37,7 @@ public class ChaserScript : MonoBehaviour
     public SpriteRenderer spr;
 
     public Sprite[] sprites;
+    public Sprite frozenSpr;
     private int spriteFrame = 0;
     private int spriteIndex = 0;
 
@@ -260,6 +261,7 @@ public class ChaserScript : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Static; // congela totalmente o corpo
         //bc.enabled = false; // desativa colisões
 
+
         // 2️⃣ Espera o tempo desejado
         yield return new WaitForSeconds(1);
 
@@ -276,12 +278,16 @@ public class ChaserScript : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Static; // congela totalmente o corpo
         bc.enabled = false; // desativa colisões
 
+        spr.sprite = frozenSpr;
+
         // 2️⃣ Espera o tempo desejado
         yield return new WaitForSeconds(tempoParado);
 
         // 3️⃣ Reativa física e colisões
         rb.bodyType = tipoOriginal;
         bc.enabled = true;
+
+        spr.sprite = sprites[0];
 
         stopped = false;
     }
