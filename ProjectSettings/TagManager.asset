@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Projectile
   - PowerUp
+  - HeartHUD
   layers:
   - Default
   - TransparentFX

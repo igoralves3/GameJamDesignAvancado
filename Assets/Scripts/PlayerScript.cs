@@ -71,6 +71,20 @@ public class PlayerScript : MonoBehaviour
         spr = GetComponent<SpriteRenderer>();
 
         dir = 1f;
+
+        SetLifeHUD();
+    }
+
+    void SetLifeHUD() {
+
+        var hearts = GameObject.FindGameObjectsWithTag("HeartHUD");
+
+
+
+        for (int i = lifes; i < 3; i++)
+        {
+            hearts[2-i].active = false;
+        }
     }
 
     // Update is called once per frame
