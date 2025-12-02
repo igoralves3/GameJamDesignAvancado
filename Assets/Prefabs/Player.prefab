@@ -135,6 +135,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 24d654ffddbab354ca356dca71f6a542, type: 3}
   pm: {fileID: 6200000, guid: 61595f28753cec242968ff7d9386f785, type: 2}
   collectedPoo: 0
+  caught: 0
+  caughtFrames: 0
+  caughtClip: {fileID: 8300000, guid: dc39225dc00d3694588eae5f706d8397, type: 3}
 --- !u!212 &1107986900733811954
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ using System;
 
 using TMPro;
 using System.Runtime.InteropServices;
+using System.Security.Permissions;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -48,6 +49,11 @@ public class PlayerScript : MonoBehaviour
 
     private RigidbodyType2D tipoOriginal;
 
+    public bool caught = false;
+    public int caughtFrames = 0;
+
+    public AudioClip caughtClip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +81,9 @@ public class PlayerScript : MonoBehaviour
         dir = 1f;
 
         SetLifeHUD();
+
+        caught = false;
+        caughtFrames = 0;
     }
 
     void SetLifeHUD() {
@@ -91,8 +100,25 @@ public class PlayerScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    { 
-    
+    {
+        if (caught)
+        {
+            caughtFrames++;
+            if (caughtFrames >= 600)
+            {
+                caughtFrames = 0;
+                Time.timeScale = 1;
+                CaughtByChaser();
+            }
+        }
+    }
+
+    void CaughtAnimation()
+    {
+        Time.timeScale = 0;
+        caught = true;
+
+        SoundFXManager.instance.PlaySoundFXClip(caughtClip, transform, 1f);
     }
 
 
@@ -170,7 +196,8 @@ public class PlayerScript : MonoBehaviour
         }
         if (col.gameObject.tag == "Chaser")
         {
-            CaughtByChaser();
+            CaughtAnimation();
+            //CaughtByChaser();
         }
     }
 
