@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+using System;
+
 using TMPro;
 using System.Runtime.InteropServices;
 
@@ -79,11 +81,11 @@ public class PlayerScript : MonoBehaviour
 
         var hearts = GameObject.FindGameObjectsWithTag("HeartHUD");
 
-
+        Array.Sort(hearts, (a, b) => a.transform.position.x.CompareTo(b.transform.position.x));
 
         for (int i = lifes; i < 3; i++)
         {
-            hearts[2-i].active = false;
+            hearts[i].SetActive(false);
         }
     }
 
